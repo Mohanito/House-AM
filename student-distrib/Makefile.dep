@@ -1,0 +1,27 @@
+boot.o: boot.S multiboot.h x86_desc.h types.h
+interrupt_handler.o: interrupt_handler.S
+system_handler.o: system_handler.S
+x86_desc.o: x86_desc.S x86_desc.h types.h
+filesystem.o: filesystem.c filesystem.h types.h system_call.h \
+  system_handler.h x86_desc.h terminal.h i8259.h lib.h keyboard.h \
+  paging.h
+i8259.o: i8259.c i8259.h types.h lib.h
+idt.o: idt.c IDT.h types.h x86_desc.h lib.h keyboard.h i8259.h terminal.h \
+  system_call.h system_handler.h paging.h interrupt_handler.h rtc.h
+kernel.o: kernel.c multiboot.h types.h x86_desc.h lib.h i8259.h debug.h \
+  tests.h IDT.h keyboard.h terminal.h system_call.h system_handler.h \
+  paging.h rtc.h filesystem.h
+keyboard.o: keyboard.c keyboard.h i8259.h types.h lib.h terminal.h \
+  system_call.h system_handler.h x86_desc.h paging.h
+lib.o: lib.c lib.h types.h terminal.h i8259.h keyboard.h system_call.h \
+  system_handler.h x86_desc.h paging.h
+paging.o: paging.c paging.h types.h lib.h
+rtc.o: rtc.c rtc.h i8259.h types.h lib.h
+system_call.o: system_call.c system_call.h types.h system_handler.h \
+  x86_desc.h terminal.h i8259.h lib.h keyboard.h paging.h filesystem.h \
+  rtc.h
+terminal.o: terminal.c lib.h types.h terminal.h i8259.h keyboard.h \
+  system_call.h system_handler.h x86_desc.h paging.h
+tests.o: tests.c tests.h x86_desc.h types.h lib.h filesystem.h \
+  system_call.h system_handler.h terminal.h i8259.h keyboard.h paging.h \
+  rtc.h IDT.h

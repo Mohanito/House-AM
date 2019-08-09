@@ -1,0 +1,38 @@
+Script started on Fri 29 Mar 2019 02:19:13 PM CDT
+USE YOUR ACTIVE DIRECTORY PASSWORD TO MOUNT DRIVES
+Mounting class directory as /ece391...
+Password: 
+
+Mounting work directory as /workdir...
+Password: 
+
+Turning off Linux extensions to CIFS...
+[user@localhost student-distrib]$ make clean
+rm -f *.o */*.o Makefile.dep
+[user@localhost student-distrib]$ make
+Makefile:39: Makefile.dep: No such file or directory
+gcc -MM -nostdinc -g boot.S interrupt_handler.S x86_desc.S filesystem.c i8259.c idt.c kernel.c keyboard.c lib.c paging.c rtc.c terminal.c tests.c   > Makefile.dep
+make: Warning: File `Makefile.dep' has modification time 5.4 s in the future
+gcc  -nostdinc -g  -c -o boot.o boot.S
+gcc  -nostdinc -g  -c -o interrupt_handler.o interrupt_handler.S
+gcc  -nostdinc -g  -c -o x86_desc.o x86_desc.S
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o filesystem.o filesystem.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o i8259.o i8259.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o idt.o idt.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o kernel.o kernel.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o keyboard.o keyboard.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o lib.o lib.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o paging.o paging.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o rtc.o rtc.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o terminal.o terminal.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o tests.o tests.c
+rm -f bootimg
+gcc -nostdlib -static boot.o interrupt_handler.o x86_desc.o filesystem.o i8259.o idt.o kernel.o keyboard.o lib.o paging.o rtc.o terminal.o tests.o -Ttext=0x400000 -o bootimg
+idt.o: In function `set_idt':
+/workdirmain/ece391/amukund2/mp3/student-distrib/idt.c:238: undefined reference to `page_fault_test'
+/workdirmain/ece391/amukund2/mp3/student-distrib/idt.c:238: undefined reference to `page_fault_test'
+collect2: ld returned 1 exit status
+make: *** [bootimg] Error 1
+[user@localhost student-distrib]$ exit
+
+Script done on Fri 29 Mar 2019 02:19:31 PM CDT
